@@ -8,6 +8,14 @@ const routes = {
   '/info': 'info.html',
 };
 
+let basePath = '/'; 
+if (location.hostname.endsWith('github.io')) {
+  const pathSegments = location.pathname.split('/');
+  if (pathSegments.length > 1 && pathSegments[1] !== '') {
+    basePath = `/${pathSegments[1]}/`;
+  }
+}
+
 const updateActiveNav = (path) => {
   const navLinks = document.querySelectorAll('nav a');
 
@@ -85,3 +93,4 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.remove('is-first-load');
   }, 2000); 
 });
+
