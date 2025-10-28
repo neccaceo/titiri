@@ -1,30 +1,15 @@
 document.body.classList.add('is-first-load');
 
+const base = '/titiri';
+
 const routes = {
-  '/': 'home.html',
-  '/index.html': 'home.html',
-  '/character': 'character.html',
-  '/character.html': 'character.html', // .html 경로 추가
-  '/gallery': 'gallery.html',
-  '/gallery.html': 'gallery.html', // .html 경로 추가
-  '/info': 'info.html',
-  '/info.html': 'info.html', // .html 경로 추가
+  [`${base}/`]: 'home.html',
+  [`${base}/index.html`]: 'home.html',
+  [`${base}/character`]: 'character.html',
+  [`${base}/gallery`]: 'gallery.html',
+  [`${base}/info`]: 'info.html',
 };
 
-/**
- * 3. [수정] GitHub Pages basePath 계산 로직 수정
- * * GitHub Pages (예: .../my-repo/) 또는 로컬/루트 도메인 (/) 에서
- * 모두 작동하도록 수정된 basePath 로직입니다.
- */
-let basePath = '/'; // 기본값 (localhost 또는 루트 도메인)
-if (location.hostname.endsWith('github.io')) {
-  // GitHub Pages인 경우: 경로가 /repo-name/ 일 수 있음
-  // location.pathname에서 첫 번째 세그먼트(repo-name)를 가져옴
-  const pathSegments = location.pathname.split('/');
-  if (pathSegments.length > 1 && pathSegments[1] !== '') {
-    basePath = `/${pathSegments[1]}/`;
-  }
-}
 const updateActiveNav = (path) => {
   const navLinks = document.querySelectorAll('nav a');
 
@@ -102,6 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.remove('is-first-load');
   }, 2000); 
 });
+
 
 
 
