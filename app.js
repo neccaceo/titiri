@@ -1,6 +1,6 @@
 document.body.classList.add('is-first-load');
 
-const base = '/titiri';
+const base = '/' + window.location.pathname.split('/')[1];
 
 const routes = {
   [`${base}/`]: 'home.html',
@@ -87,6 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.remove('is-first-load');
   }, 2000); 
 });
+
 
 
 
