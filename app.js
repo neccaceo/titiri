@@ -1,21 +1,12 @@
 document.body.classList.add('is-first-load');
 
 const routes = {
-  '/': 'home.html',
-  '/index.html': 'home.html',
-  '/character': 'character.html',
-  '/gallery': 'gallery.html',
-  '/info': 'info.html',
+  '': 'titiri/home.html',
+  '/index.html': 'titiri/home.html',
+  '/character': 'titiri/character.html',
+  '/gallery': 'titiri/gallery.html',
+  '/info': 'titiri/info.html',
 };
-
-let basePath = '/'; 
-if (location.hostname.endsWith('github.io')) {
-  const pathSegments = location.pathname.split('/');
-  if (pathSegments.length > 1 && pathSegments[1] !== '') {
-    basePath = `/${pathSegments[1]}/`;
-  }
-}
-
 const updateActiveNav = (path) => {
   const navLinks = document.querySelectorAll('nav a');
 
@@ -93,4 +84,5 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.remove('is-first-load');
   }, 2000); 
 });
+
 
