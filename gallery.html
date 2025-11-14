@@ -1,13 +1,215 @@
-<div style="max-width: 80rem; margin: 0 auto; background: white; border-radius: 1rem; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); overflow: hidden;">
-    <h1 style="font-size: 1.875rem; font-weight: bold; color: #1f2937; margin-bottom: 0.5rem; padding: 1.5rem 1.5rem 0 1.5rem;">🖼️ 이미지 갤러리</h1>
+<style>
+    body {
+        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        overflow-x: hidden;
+    }
 
-    <div id="error" style="display: none; padding: 1.5rem;"></div>
+    .container {
+        max-width: 80rem;
+        margin: 0 auto;
+        background: white;
+        border-radius: 1rem;
+        box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
 
-    <div id="swiper-container" style="margin-top: 2.5rem;">
+    .container h1 {
+        font-size: 1.875rem;
+        font-weight: bold;
+        color: #1f2937;
+        margin-bottom: 0.5rem;
+        padding: 1.5rem 1.5rem 0 1.5rem;
+        margin: 0;
+    }
+
+    #error {
+        display: none;
+        padding: 1.5rem;
+    }
+
+    .error-message {
+        background-color: #fee2e2;
+        color: #991b1b;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        margin: 1.25rem 0;
+    }
+
+    #swiper-container {
+        margin-top: 2.5rem;
+    }
+
+    .mySwiper {
+        width: 100%;
+        height: 500px;
+        padding-bottom: 40px;
+        box-sizing: border-box;
+    }
+
+    .mySwiper .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        background-color: transparent;
+        height: 100%;
+        width: 260px;
+        transition: transform 0.4s ease, opacity 0.4s ease;
+        transform-origin: center bottom;
+        transform: translateZ(0) scale(0.8);
+        opacity: 0.4;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        cursor: pointer;
+    }
+
+    .mySwiper .swiper-slide-active {
+        transform: translateZ(0) scale(1);
+        opacity: 1;
+    }
+
+    .card-wrapper {
+        position: relative;
+        background: white;
+        border-radius: 0.5rem;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+
+    .card-image {
+        width: 100%;
+        height: 350px;
+        object-fit: cover;
+        display: block;
+    }
+
+    .card-content {
+        padding: 1rem;
+    }
+
+    .card-title {
+        font-size: 0.875rem;
+        color: #1f2937;
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin: 0;
+    }
+
+    .card-source {
+        font-size: 0.875rem;
+        color: #4b5563;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin: 0;
+    }
+
+    .new-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #ef4444;
+        color: white;
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: bold;
+        z-index: 10;
+    }
+
+    .swiper {
+        width: 100%;
+    }
+
+    :root {
+        --swiper-navigation-color: #4b5563;
+        --swiper-pagination-color: #4b5563;
+    }
+
+    .swiper-button-prev {
+        left: 10px;
+    }
+
+    .swiper-button-next {
+        right: 10px;
+    }
+
+    @media (min-width: 1024px) {
+        .mySwiper {
+            padding-right: 500px;
+        }
+        .swiper-button-prev {
+            left: calc(50% - 390px);
+        }
+        .swiper-button-next {
+            left: calc(50% - 110px);
+            right: auto;
+        }
+    }
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+        .mySwiper {
+            padding-right: 400px;
+        }
+        .swiper-button-prev {
+            left: calc(50% - 340px);
+        }
+        .swiper-button-next {
+            left: calc(50% - 60px);
+            right: auto;
+        }
+    }
+
+    .full-screen-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .full-screen-modal.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .full-screen-modal img {
+        max-width: 90vw;
+        max-height: 90vh;
+        object-fit: contain;
+        cursor: zoom-out;
+    }
+
+    .modal-close-button {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 2.5rem;
+        cursor: pointer;
+        z-index: 1001;
+    }
+</style>
+
+<div class="container">
+    <h1>🖼️ 이미지 갤러리</h1>
+    <div id="error"></div>
+    <div id="swiper-container">
         <div class="swiper mySwiper">
-            <div class="swiper-wrapper" id="image-container">
-            </div>
-
+            <div class="swiper-wrapper" id="image-container"></div>
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
             <div class="swiper-pagination"></div>
@@ -22,24 +224,9 @@
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-<style>
-    .modal-close-button {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        background: none;
-        border: none;
-        color: white;
-        font-size: 2.5rem;
-        cursor: pointer;
-        z-index: 1001;
-    }
-</style>
-
 <script>
     const imageContainer = document.getElementById('image-container');
     const errorDiv = document.getElementById('error');
-    const swiperContainer = document.getElementById('swiper-container');
     const fullScreenModal = document.getElementById('fullScreenModal');
     const fullScreenImage = document.getElementById('fullScreenImage');
     const closeModalBtn = document.getElementById('closeModalBtn');
@@ -50,7 +237,6 @@
         try {
             errorDiv.style.display = 'none';
 
-            // JSON 파일 대신 직접 데이터 포함
             const images = [
                 {
                     "name": "이미지 1",
@@ -73,7 +259,7 @@
 
         } catch (error) {
             errorDiv.style.display = 'block';
-            errorDiv.innerHTML = `<div style="background-color: #fee2e2; color: #991b1b; padding: 1rem; border-radius: 0.5rem; margin: 1.25rem 0;">
+            errorDiv.innerHTML = `<div class="error-message">
                 <strong>오류:</strong> ${error.message}<br>
                 <small>브라우저 콘솔(F12)에서 더 자세한 정보를 확인하세요.</small>
             </div>`;
@@ -97,17 +283,17 @@
             slide.className = 'swiper-slide';
 
             const isNew = isNewImage(image.date);
-            const newBadge = isNew ? '<span style="position: absolute; top: 10px; right: 10px; background-color: #ef4444; color: white; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: bold; z-index: 10;">NEW</span>' : '';
+            const newBadge = isNew ? '<span class="new-badge">NEW</span>' : '';
 
             slide.innerHTML = `
-                <div style="position: relative; background: white; border-radius: 0.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow: hidden;">
+                <div class="card-wrapper">
                     ${newBadge}
-                    <img src="${image.url}" alt="${image.name || `이미지 ${index + 1}`}" onerror="this.alt='이미지 로드 실패'; this.style.backgroundColor='#f3f4f6';" style="width: 100%; height: 350px; object-fit: cover; display: block;">
-                    <div style="padding: 1rem;">
-                        <p style="font-size: 0.875rem; color: #1f2937; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${image.name || `이미지 ${index + 1}`}">
+                    <img src="${image.url}" alt="${image.name || `이미지 ${index + 1}`}" class="card-image" onerror="this.style.backgroundColor='#f3f4f6';">
+                    <div class="card-content">
+                        <p class="card-title" title="${image.name || `이미지 ${index + 1}`}">
                             <strong>이름:</strong> ${image.name || `이미지 ${index + 1}`}
                         </p>
-                        <p style="font-size: 0.875rem; color: #4b5563; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${image.source || '미지정'}">
+                        <p class="card-source" title="${image.source || '미지정'}">
                             <strong>출처:</strong> ${image.source || '미지정'}
                         </p>
                     </div>
@@ -165,6 +351,5 @@
         }
     });
 
-    // 페이지 로드 시 이미지 불러오기
     loadImages();
 </script>
