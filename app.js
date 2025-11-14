@@ -195,7 +195,7 @@ function initGallery() {
             grabCursor: true,
             centeredSlides: true,
             slidesPerView: "auto",
-            spaceBetween: 40,
+            spaceBetween: 0,
             loop: true,
             loopFillGroupWithBlank: false,
             navigation: {
@@ -255,6 +255,7 @@ function initGallery() {
 
     loadImages();
 }
+
 
 
 
