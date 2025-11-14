@@ -44,7 +44,7 @@ const loadContent = async (path) => {
     contentElement.innerHTML = html;
 
     // gallery.html 로드 시 script 실행
-    if (normalizedPath === '[`${base}/gallery`]') {
+    if (normalizedPath === `${base}/gallery`) {
       initGallery();
     }
 
@@ -227,6 +227,7 @@ function initGallery() {
 
     loadImages();
 }
+
 
 
 
