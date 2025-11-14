@@ -97,19 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.remove('is-first-load');
   }, 2000); 
 });
-
-// Swiper.js 스크립트 추가 (head에)
-const swiperScript = document.createElement('script');
-swiperScript.src = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js';
-swiperScript.onload = () => {
-  console.log('Swiper 로드 완료');
-};
-document.head.appendChild(swiperScript);
-const swiperStyle = document.createElement('link');
-swiperStyle.rel = 'stylesheet';
-swiperStyle.href = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css';
-document.head.appendChild(swiperStyle);
-
 // gallery 초기화 함수
 function initGallery() {
     const imageContainer = document.getElementById('image-container');
@@ -272,4 +259,5 @@ function initGallery() {
 
     loadImages();
 }
+
 
