@@ -128,10 +128,6 @@ function initGallery() {
                 { "name": "이미지 9", "url": "https://picsum.photos/400/500?random=9", "source": "Picsum", "date": "2025-11-02" },
                 { "name": "이미지 10", "url": "https://picsum.photos/400/500?random=10", "source": "Picsum", "date": "2025-08-10" }
             ];
-
-            console.log('로드된 이미지 개수:', images.length);
-            console.log('이미지 배열:', images);
-
             if (!Array.isArray(images) || images.length === 0) {
                 throw new Error('이미지 목록이 비어있습니다.');
             }
@@ -255,6 +251,7 @@ function initGallery() {
 
     loadImages();
 }
+
 
 
 
