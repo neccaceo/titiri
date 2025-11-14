@@ -198,10 +198,6 @@ function initGallery() {
             spaceBetween: 40,
             loop: true,
             loopFillGroupWithBlank: false,
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
-            },
             navigation: {
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev",
@@ -259,5 +255,6 @@ function initGallery() {
 
     loadImages();
 }
+
 
 
