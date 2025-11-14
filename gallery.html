@@ -1,17 +1,9 @@
-<div class="max-w-7xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
-    <h1 class="text-3xl font-bold text-gray-800 mb-2 px-6 pt-6 sm:px-8 sm:pt-8">🖼️ 이미지 갤러리</h1>
-    <p class="text-gray-600 mb-6 px-6 sm:px-8">
-        이미지 목록을 불러와 표시합니다.
-    </p>
+<div style="max-width: 80rem; margin: 0 auto; background: white; border-radius: 1rem; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); overflow: hidden;">
+    <h1 style="font-size: 1.875rem; font-weight: bold; color: #1f2937; margin-bottom: 0.5rem; padding: 1.5rem 1.5rem 0 1.5rem;">🖼️ 이미지 갤러리</h1>
 
-    <div id="loading" class="text-center my-10">
-        <div class="loading-spinner mx-auto"></div>
-        <p class="text-gray-600 mt-3">이미지를 불러오는 중입니다...</p>
-    </div>
+    <div id="error" style="display: none; padding: 1.5rem;"></div>
 
-    <div id="error" class="hidden px-6 sm:px-8"></div>
-
-    <div id="swiper-container" class="mt-10 hidden">
+    <div id="swiper-container" style="margin-top: 2.5rem;">
         <div class="swiper mySwiper">
             <div class="swiper-wrapper" id="image-container">
             </div>
@@ -31,74 +23,6 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <style>
-    .loading-spinner {
-        display: inline-block;
-        width: 40px;
-        height: 40px;
-        border: 4px solid #e5e7eb;
-        border-top: 4px solid #2563eb;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-
-    .error-message {
-        background-color: #fee2e2;
-        color: #991b1b;
-        padding: 16px;
-        border-radius: 8px;
-        margin: 20px 0;
-    }
-
-    .new-badge {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background-color: #ef4444;
-        color: white;
-        padding: 4px 10px;
-        border-radius: 4px;
-        font-size: 12px;
-        font-weight: bold;
-        z-index: 10;
-    }
-
-    .card-content {
-        position: relative;
-    }
-
-    .full-screen-modal {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background-color: rgba(0, 0, 0, 0.8);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.3s ease, visibility 0.3s ease;
-    }
-
-    .full-screen-modal.active {
-        opacity: 1;
-        visibility: visible;
-    }
-
-    .full-screen-modal img {
-        max-width: 90vw;
-        max-height: 90vh;
-        object-fit: contain;
-        cursor: zoom-out;
-    }
-
     .modal-close-button {
         position: absolute;
         top: 20px;
@@ -114,7 +38,6 @@
 
 <script>
     const imageContainer = document.getElementById('image-container');
-    const loadingDiv = document.getElementById('loading');
     const errorDiv = document.getElementById('error');
     const swiperContainer = document.getElementById('swiper-container');
     const fullScreenModal = document.getElementById('fullScreenModal');
@@ -125,9 +48,7 @@
 
     async function loadImages() {
         try {
-            loadingDiv.classList.remove('hidden');
-            errorDiv.classList.add('hidden');
-            swiperContainer.classList.add('hidden');
+            errorDiv.style.display = 'none';
 
             // JSON 파일 대신 직접 데이터 포함
             const images = [
@@ -144,8 +65,6 @@
             }
 
             renderImages(images);
-            loadingDiv.classList.add('hidden');
-            swiperContainer.classList.remove('hidden');
 
             if (swiper) {
                 swiper.destroy();
@@ -153,9 +72,8 @@
             initSwiper();
 
         } catch (error) {
-            loadingDiv.classList.add('hidden');
-            errorDiv.classList.remove('hidden');
-            errorDiv.innerHTML = `<div class="error-message">
+            errorDiv.style.display = 'block';
+            errorDiv.innerHTML = `<div style="background-color: #fee2e2; color: #991b1b; padding: 1rem; border-radius: 0.5rem; margin: 1.25rem 0;">
                 <strong>오류:</strong> ${error.message}<br>
                 <small>브라우저 콘솔(F12)에서 더 자세한 정보를 확인하세요.</small>
             </div>`;
@@ -179,17 +97,17 @@
             slide.className = 'swiper-slide';
 
             const isNew = isNewImage(image.date);
-            const newBadge = isNew ? '<span class="new-badge">NEW</span>' : '';
+            const newBadge = isNew ? '<span style="position: absolute; top: 10px; right: 10px; background-color: #ef4444; color: white; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: bold; z-index: 10;">NEW</span>' : '';
 
             slide.innerHTML = `
-                <div class="card-content bg-white rounded-lg shadow-md overflow-hidden">
+                <div style="position: relative; background: white; border-radius: 0.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow: hidden;">
                     ${newBadge}
-                    <img src="${image.url}" alt="${image.name || `이미지 ${index + 1}`}" onerror="this.alt='이미지 로드 실패'; this.style.backgroundColor='#f3f4f6';">
-                    <div class="p-4">
-                        <p class="text-sm text-gray-800 font-semibold truncate" title="${image.name || `이미지 ${index + 1}`}">
+                    <img src="${image.url}" alt="${image.name || `이미지 ${index + 1}`}" onerror="this.alt='이미지 로드 실패'; this.style.backgroundColor='#f3f4f6';" style="width: 100%; height: 350px; object-fit: cover; display: block;">
+                    <div style="padding: 1rem;">
+                        <p style="font-size: 0.875rem; color: #1f2937; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${image.name || `이미지 ${index + 1}`}">
                             <strong>이름:</strong> ${image.name || `이미지 ${index + 1}`}
                         </p>
-                        <p class="text-sm text-gray-600 truncate" title="${image.source || '미지정'}">
+                        <p style="font-size: 0.875rem; color: #4b5563; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${image.source || '미지정'}">
                             <strong>출처:</strong> ${image.source || '미지정'}
                         </p>
                     </div>
