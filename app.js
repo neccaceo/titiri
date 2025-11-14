@@ -112,43 +112,24 @@ function initGallery() {
             errorDiv.style.display = 'none';
 
             const images = [
-                {
-                    "name": "이미지 1",
-                    "url": "https://i.imgur.com/a3vpRs9.png",
-                    "source": "Imgur",
-                    "date": "2025-11-10"
-                },
-  {
-    "name": "이미지 2",
-    "url": "https://i.imgur.com/FWWXmiq.png",
-    "source": "Placeholder",
-    "date": "2025-10-15"
-  },
-  {
-    "name": "이미지 3",
-    "url": "https://i.imgur.com/hNGoEl8.png",
-    "source": "Placeholder",
-    "date": "2025-09-20"
-  },
-  {
-    "name": "이미지 4",
-    "url": "https://i.imgur.com/NJxAh5d.png",
-    "source": "Placeholder",
-    "date": "2025-11-05"
-  },
-  {
-    "name": "이미지 5",
-    "url": "https://i.imgur.com/a3vpRs9.png",
-    "source": "Placeholder",
-    "date": "2025-08-01"
-  }
+                { "name": "이미지 1", "url": "https://picsum.photos/400/500?random=1", "source": "Picsum", "date": "2025-11-10" },
+                { "name": "이미지 2", "url": "https://picsum.photos/400/500?random=2", "source": "Picsum", "date": "2025-10-15" },
+                { "name": "이미지 3", "url": "https://picsum.photos/400/500?random=3", "source": "Picsum", "date": "2025-09-20" },
+                { "name": "이미지 4", "url": "https://picsum.photos/400/500?random=4", "source": "Picsum", "date": "2025-11-05" },
+                { "name": "이미지 5", "url": "https://picsum.photos/400/500?random=5", "source": "Picsum", "date": "2025-08-01" },
+                { "name": "이미지 6", "url": "https://picsum.photos/400/500?random=6", "source": "Picsum", "date": "2025-11-08" },
+                { "name": "이미지 7", "url": "https://picsum.photos/400/500?random=7", "source": "Picsum", "date": "2025-10-20" },
+                { "name": "이미지 8", "url": "https://picsum.photos/400/500?random=8", "source": "Picsum", "date": "2025-09-15" },
+                { "name": "이미지 9", "url": "https://picsum.photos/400/500?random=9", "source": "Picsum", "date": "2025-11-02" },
+                { "name": "이미지 10", "url": "https://picsum.photos/400/500?random=10", "source": "Picsum", "date": "2025-08-10" }
             ];
-        console.log('로드된 이미지 개수:', images.length); // 이 줄 추가
-        console.log('이미지 배열:', images); // 이 줄 추가
 
-        if (!Array.isArray(images) || images.length === 0) {
-            throw new Error('이미지 목록이 비어있습니다.');
-        }
+            console.log('로드된 이미지 개수:', images.length);
+            console.log('이미지 배열:', images);
+
+            if (!Array.isArray(images) || images.length === 0) {
+                throw new Error('이미지 목록이 비어있습니다.');
+            }
 
             renderImages(images);
 
@@ -211,6 +192,7 @@ function initGallery() {
             slidesPerView: "auto",
             spaceBetween: 40,
             loop: true,
+            loopFillGroupWithBlank: false,
             pagination: {
                 el: ".swiper-pagination",
                 clickable: true,
@@ -253,6 +235,7 @@ function initGallery() {
 
     loadImages();
 }
+
 
 
 
