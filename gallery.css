@@ -20,6 +20,9 @@ overflow-x: hidden;
         margin: 0;
     }
 
+main{
+padding-right:0;
+}
     /* Swiper 컨테이너 */
     .swiper-container {
         margin-top: 1.5rem;
