@@ -1,17 +1,164 @@
-<main>
-    <div>
-        <h1 class="great-vibes-regular">Titiri</h1>
+  <h1>🖼️ 이미지 갤러리</h1>
+        <p>
+            이미지 목록을 불러와 표시합니다.
+        </p>
+
+        <div id="loading" class="text-center my-10">
+            <div class="loading-spinner mx-auto"></div>
+            <p class="text-gray-600 mt-3">이미지를 불러오는 중입니다...</p>
+        </div>
+
+        <div id="error" class="hidden px-6 sm:px-8"></div>
+
+        <div id="swiper-container" class="mt-10 hidden">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper" id="image-container">
+                </div>
+
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
     </div>
-    <div>
-        <p>우리에게 허락된 불멸이 아니라도</p>
-        <p>이것이 비록 정해진 운명이 아닐지라도</p>
-        <p>먼 길 돌아 증명할 수 있다면 이것이 <b>'사랑'</b>임을</p>
+
+    <div id="fullScreenModal" class="full-screen-modal">
+        <button id="closeModalBtn" class="modal-close-button">&times;</button>
+        <img id="fullScreenImage" src="" alt="확대 이미지">
     </div>
-    <div class="name">
-        <div class="titus">티 투 스</div>
-        <div class="richt">리 히 트</div>
-    </div>
-    <div class="img">
-        <img src="https://placehold.co/600x600/fff/C4D6FF?text=TITIRI">
-    </div>
-</main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+        const imageContainer = document.getElementById('image-container');
+        const loadingDiv = document.getElementById('loading');
+        const errorDiv = document.getElementById('error');
+        const swiperContainer = document.getElementById('swiper-container');
+        const fullScreenModal = document.getElementById('fullScreenModal');
+        const fullScreenImage = document.getElementById('fullScreenImage');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+
+        let swiper = null;
+
+        async function loadImages() {
+            try {
+                loadingDiv.classList.remove('hidden');
+                errorDiv.classList.add('hidden');
+                swiperContainer.classList.add('hidden');
+
+                const response = await fetch('./images.json');
+                if (!response.ok) {
+                    throw new Error('images.json을 찾을 수 없습니다.');
+                }
+
+                const images = await response.json();
+
+                if (!Array.isArray(images) || images.length === 0) {
+                    throw new Error('이미지 목록이 비어있습니다.');
+                }
+
+                renderImages(images);
+                loadingDiv.classList.add('hidden');
+                swiperContainer.classList.remove('hidden');
+
+                if (swiper) {
+                    swiper.destroy();
+                }
+                initSwiper();
+
+            } catch (error) {
+                loadingDiv.classList.add('hidden');
+                errorDiv.classList.remove('hidden');
+                errorDiv.innerHTML = `<div class="error-message">오류: ${error.message}</div>`;
+                console.error('이미지 로드 오류:', error);
+            }
+        }
+
+        function isNewImage(dateString) {
+            if (!dateString) return false;
+            const imageDate = new Date(dateString);
+            const now = new Date();
+            const oneMonthAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+            return imageDate >= oneMonthAgo;
+        }
+
+        function renderImages(images) {
+            imageContainer.innerHTML = '';
+
+            images.forEach((image, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'swiper-slide';
+
+                const isNew = isNewImage(image.date);
+                const newBadge = isNew ? '<span class="new-badge">NEW</span>' : '';
+
+                slide.innerHTML = `
+                    <div class="card-content bg-white rounded-lg shadow-md overflow-hidden">
+                        ${newBadge}
+                        <img src="${image.url}" alt="${image.name || `이미지 ${index + 1}`}">
+                        <div class="p-4">
+                            <p class="text-sm text-gray-800 font-semibold truncate" title="${image.name || `이미지 ${index + 1}`}">
+                                <strong>이름:</strong> ${image.name || `이미지 ${index + 1}`}
+                            </p>
+                            <p class="text-sm text-gray-600 truncate" title="${image.source || '미지정'}">
+                                <strong>출처:</strong> ${image.source || '미지정'}
+                            </p>
+                        </div>
+                    </div>
+                `;
+
+                imageContainer.appendChild(slide);
+            });
+        }
+
+        function initSwiper() {
+            swiper = new Swiper(".mySwiper", {
+                grabCursor: true,
+                centeredSlides: true,
+                slidesPerView: "auto",
+                spaceBetween: 40,
+                loop: true,
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+            });
+
+            swiper.on('click', function(swiper, event) {
+                const clickedSlide = event.target.closest('.swiper-slide');
+                if (!clickedSlide) return;
+
+                const clickedIndex = swiper.slides.indexOf(clickedSlide);
+
+                if (clickedSlide.classList.contains('swiper-slide-active')) {
+                    const imageElement = clickedSlide.querySelector('img');
+                    if (imageElement && imageElement.src) {
+                        fullScreenImage.src = imageElement.src;
+                        fullScreenModal.classList.add('active');
+                    }
+                } else {
+                    swiper.slideTo(clickedIndex);
+                }
+            });
+        }
+
+        closeModalBtn.addEventListener('click', () => {
+            fullScreenModal.classList.remove('active');
+            fullScreenImage.src = '';
+        });
+
+        fullScreenModal.addEventListener('click', (event) => {
+            if (event.target === fullScreenModal) {
+                fullScreenModal.classList.remove('active');
+                fullScreenImage.src = '';
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', loadImages);
+    </script>
+
