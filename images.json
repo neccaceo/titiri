@@ -1,31 +1,31 @@
 [
   {
     "name": "이미지 1",
-    "url": "https://placehold.co/400x500/f87171/ffffff?text=Image+1",
+    "url": "https://i.imgur.com/AWwcExh.png",
     "source": "Placeholder",
     "date": "2025-11-10"
   },
   {
     "name": "이미지 2",
-    "url": "https://placehold.co/400x500/60a5fa/ffffff?text=Image+2",
+    "url": "https://i.imgur.com/FWWXmiq.png",
     "source": "Placeholder",
     "date": "2025-10-15"
   },
   {
     "name": "이미지 3",
-    "url": "https://placehold.co/400x500/4ade80/ffffff?text=Image+3",
+    "url": "https://i.imgur.com/hNGoEl8.png",
     "source": "Placeholder",
     "date": "2025-09-20"
   },
   {
     "name": "이미지 4",
-    "url": "https://placehold.co/400x500/facc15/ffffff?text=Image+4",
+    "url": "https://i.imgur.com/NJxAh5d.png",
     "source": "Placeholder",
     "date": "2025-11-05"
   },
   {
     "name": "이미지 5",
-    "url": "https://placehold.co/400x500/c084fc/ffffff?text=Image+5",
+    "url": "https://i.imgur.com/a3vpRs9.png",
     "source": "Placeholder",
     "date": "2025-08-01"
   }
