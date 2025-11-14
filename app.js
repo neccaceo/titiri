@@ -143,10 +143,12 @@ function initGallery() {
     "date": "2025-08-01"
   }
             ];
+        console.log('로드된 이미지 개수:', images.length); // 이 줄 추가
+        console.log('이미지 배열:', images); // 이 줄 추가
 
-            if (!Array.isArray(images) || images.length === 0) {
-                throw new Error('이미지 목록이 비어있습니다.');
-            }
+        if (!Array.isArray(images) || images.length === 0) {
+            throw new Error('이미지 목록이 비어있습니다.');
+        }
 
             renderImages(images);
 
@@ -251,6 +253,7 @@ function initGallery() {
 
     loadImages();
 }
+
 
 
 
