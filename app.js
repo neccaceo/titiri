@@ -105,6 +105,10 @@ swiperScript.onload = () => {
   console.log('Swiper 로드 완료');
 };
 document.head.appendChild(swiperScript);
+const swiperStyle = document.createElement('link');
+swiperStyle.rel = 'stylesheet';
+swiperStyle.href = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css';
+document.head.appendChild(swiperStyle);
 
 // gallery 초기화 함수
 function initGallery() {
@@ -268,3 +272,4 @@ function initGallery() {
 
     loadImages();
 }
+
