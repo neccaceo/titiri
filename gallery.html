@@ -129,13 +129,15 @@
             errorDiv.classList.add('hidden');
             swiperContainer.classList.add('hidden');
 
-            // 절대 경로 또는 현재 위치의 루트 기준으로 수정
-            const response = await fetch('./images.json');
-            if (!response.ok) {
-                throw new Error('images.json을 찾을 수 없습니다.');
-            }
-
-            const images = await response.json();
+            // JSON 파일 대신 직접 데이터 포함
+            const images = [
+                {
+                    "name": "이미지 1",
+                    "url": "https://i.imgur.com/a3vpRs9.png",
+                    "source": "Imgur",
+                    "date": "2025-11-10"
+                }
+            ];
 
             if (!Array.isArray(images) || images.length === 0) {
                 throw new Error('이미지 목록이 비어있습니다.');
