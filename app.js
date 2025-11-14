@@ -117,7 +117,31 @@ function initGallery() {
                     "url": "https://i.imgur.com/a3vpRs9.png",
                     "source": "Imgur",
                     "date": "2025-11-10"
-                }
+                },
+  {
+    "name": "이미지 2",
+    "url": "https://i.imgur.com/FWWXmiq.png",
+    "source": "Placeholder",
+    "date": "2025-10-15"
+  },
+  {
+    "name": "이미지 3",
+    "url": "https://i.imgur.com/hNGoEl8.png",
+    "source": "Placeholder",
+    "date": "2025-09-20"
+  },
+  {
+    "name": "이미지 4",
+    "url": "https://i.imgur.com/NJxAh5d.png",
+    "source": "Placeholder",
+    "date": "2025-11-05"
+  },
+  {
+    "name": "이미지 5",
+    "url": "https://i.imgur.com/a3vpRs9.png",
+    "source": "Placeholder",
+    "date": "2025-08-01"
+  }
             ];
 
             if (!Array.isArray(images) || images.length === 0) {
@@ -227,6 +251,7 @@ function initGallery() {
 
     loadImages();
 }
+
 
 
 
