@@ -45,7 +45,12 @@ const loadContent = async (path) => {
 
     // gallery.html 로드 시 script 실행
     if (normalizedPath === `${base}/gallery`) {
-      initGallery();
+      // Swiper가 로드되었는지 확인
+      if (typeof Swiper !== 'undefined') {
+        initGallery();
+      } else {
+        console.error('Swiper가 로드되지 않았습니다.');
+      }
     }
 
     updateActiveNav(normalizedPath);
@@ -55,8 +60,9 @@ const loadContent = async (path) => {
     contentElement.innerHTML = '<h2>페이지를 불러올 수 없습니다.</h2>';
   }
 };
+
 /**
- * 5. 링크 클릭을 가로채는 함수
+ * 링크 클릭을 가로채는 함수
  * @param {Event} event - 클릭 이벤트
  */
 const onLinkClick = (event) => {
@@ -95,6 +101,9 @@ document.addEventListener('DOMContentLoaded', () => {
 // Swiper.js 스크립트 추가 (head에)
 const swiperScript = document.createElement('script');
 swiperScript.src = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js';
+swiperScript.onload = () => {
+  console.log('Swiper 로드 완료');
+};
 document.head.appendChild(swiperScript);
 
 // gallery 초기화 함수
@@ -104,6 +113,11 @@ function initGallery() {
     const fullScreenModal = document.getElementById('fullScreenModal');
     const fullScreenImage = document.getElementById('fullScreenImage');
     const closeModalBtn = document.getElementById('closeModalBtn');
+
+    if (!imageContainer || !errorDiv || !fullScreenModal || !fullScreenImage || !closeModalBtn) {
+        console.error('필수 요소를 찾을 수 없습니다.');
+        return;
+    }
 
     let swiper = null;
 
@@ -203,6 +217,25 @@ function initGallery() {
             },
         });
 
+        // 슬라이드 변경 시 opacity 조정
+        swiper.on('slideChange', () => {
+            document.querySelectorAll('.mySwiper .swiper-slide').forEach(slide => {
+                slide.style.opacity = '0.4';
+            });
+            if (swiper.slides[swiper.activeIndex]) {
+                swiper.slides[swiper.activeIndex].style.opacity = '1';
+            }
+        });
+
+        // 초기 활성 슬라이드 opacity 설정
+        document.querySelectorAll('.mySwiper .swiper-slide').forEach(slide => {
+            slide.style.opacity = '0.4';
+        });
+        if (swiper.slides[swiper.activeIndex]) {
+            swiper.slides[swiper.activeIndex].style.opacity = '1';
+        }
+
+        // 클릭 이벤트
         swiper.on('click', function(swiper, event) {
             const clickedSlide = event.target.closest('.swiper-slide');
             if (!clickedSlide) return;
@@ -235,13 +268,3 @@ function initGallery() {
 
     loadImages();
 }
-
-
-
-
-
-
-
-
-
-
