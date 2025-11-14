@@ -1,13 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 
-/* --- 폰트 정의 (기존과 동일) --- */
 @font-face {
   font-family: 'Paperozi';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-1Thin.woff2') format('woff2');
   font-weight: 100;
   font-display: swap;
 }
-/* ... (Paperozi 200-900 폰트 정의) ... */
 @font-face {
   font-family: 'Paperozi';
   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-2ExtraLight.woff2') format('woff2');
@@ -78,7 +76,6 @@
   font-display: swap;
 }
 
-/* --- 기본 스타일 (기존과 동일) --- */
 body {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -100,17 +97,16 @@ body {
   font-style: normal;
 }
 
-/* --- 레이아웃 (index.html의 body에 적용) --- */
 .two {
   margin: 0;
   font-family: system-ui, sans-serif;
   display: grid;
-  grid-template-columns: 250px 1fr;
+  grid-template-columns: 250px 100%;
   min-height: 100vh;
   background: linear-gradient(to bottom, #fff, var(--back));
 }
 
-/* --- Nav (기존과 동일) --- */
+/* --- Nav --- */
 nav {
   background: #00000000;
   padding: 20px;
@@ -176,7 +172,7 @@ nav a.active::after {
 /* --- Main (콘텐츠 영역) --- */
 main {
   padding: 20px;
-  position: relative; /* position: absolute 자식들의 기준점 */
+  position: relative; 
 }
 
 .name {
@@ -226,7 +222,7 @@ p {
   margin: 10px;
 }
 
-/* --- 별/라인 요소들 (기존과 동일) --- */
+/* --- 별/라인 요소들 --- */
 .star2 {
   background-color: var(--point2);
   right: calc(10% + 570px);
@@ -371,7 +367,7 @@ p {
 
 /* --- 애니메이션 설정 --- */
 
-/* Nav 애니메이션 (기존과 동일 - 첫 로드 시 항상 실행) */
+/* Nav 애니메이션 */
 nav li {
   transform: translateX(-300px);
   opacity: 1;
@@ -395,7 +391,7 @@ nav li:nth-child(5) {
 }
 
 
-/* --- 콘텐츠 애니메이션 (빠른 딜레이 기본값) --- */
+/* --- 콘텐츠 애니메이션 --- */
 
 .img {
   opacity: 0;
@@ -425,7 +421,7 @@ main .main div {
   animation-delay: 0.1s;
 }
 
-/* (빠른 순차 딜레이) */
+/
 .main div:nth-child(1) {
   animation-delay: 0.1s; 
 }
@@ -534,4 +530,5 @@ body.is-first-load .anime {
     transform: translate(0px, 0px);
   }
 }
+
 
