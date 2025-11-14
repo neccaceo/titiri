@@ -1,45 +1,28 @@
 <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
     body {
         font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
         overflow-x: hidden;
     }
 
-    .container {
-        max-width: 80rem;
-        margin: 0 auto;
-        background: white;
-        border-radius: 1rem;
-        box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
-        overflow: hidden;
-    }
-
-    .container h1 {
+    h1 {
         font-size: 1.875rem;
         font-weight: bold;
         color: #1f2937;
-        margin-bottom: 0.5rem;
-        padding: 1.5rem 1.5rem 0 1.5rem;
+        padding: 2rem 1.5rem 0;
         margin: 0;
     }
 
-    #error {
-        display: none;
-        padding: 1.5rem;
+    /* Swiper 컨테이너 */
+    .swiper-container {
+        margin-top: 1.5rem;
     }
 
-    .error-message {
-        background-color: #fee2e2;
-        color: #991b1b;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        margin: 1.25rem 0;
-    }
-
-    #swiper-container {
-        margin-top: 2.5rem;
-    }
-
-    /* Swiper 컨테이너 크기 지정 */
     .mySwiper {
         width: 100%;
         height: 500px;
@@ -47,7 +30,7 @@
         box-sizing: border-box;
     }
 
-    /* Swiper 슬라이드 스타일 */
+    /* 슬라이드 스타일 */
     .mySwiper .swiper-slide {
         text-align: center;
         font-size: 18px;
@@ -66,10 +49,16 @@
         cursor: pointer;
     }
 
-    /* 활성화된 슬라이드 */
+    /* 활성 슬라이드 */
     .mySwiper .swiper-slide-active {
         transform: translateZ(0) scale(1);
         opacity: 1;
+        cursor: pointer;
+    }
+
+    /* 비활성 슬라이드는 클릭 못하게 */
+    .mySwiper .swiper-slide:not(.swiper-slide-active) {
+        pointer-events: none;
     }
 
     /* 카드 래퍼 */
@@ -134,7 +123,7 @@
         z-index: 10;
     }
 
-    /* Swiper 기본 스타일 */
+    /* Swiper 기본 */
     .swiper {
         width: 100%;
     }
@@ -150,41 +139,21 @@
         --swiper-pagination-color: #4b5563;
     }
 
-    /* 화살표 위치 기본값 */
+    /* 화살표 위치 - 포커스 된 이미지 양옆 */
+    .swiper-button-prev,
+    .swiper-button-next {
+        top: 50%;
+        transform: translateY(-50%);
+        width: auto;
+        height: auto;
+    }
+
     .swiper-button-prev {
-        left: 10px;
+        left: calc(50% - 150px);
     }
 
     .swiper-button-next {
-        right: 10px;
-    }
-
-    /* 반응형 화살표 위치 - 1024px 이상 */
-    @media (min-width: 1024px) {
-        .mySwiper {
-            padding-right: 500px;
-        }
-        .swiper-button-prev {
-            left: calc(50% - 390px);
-        }
-        .swiper-button-next {
-            left: calc(50% - 110px);
-            right: auto;
-        }
-    }
-
-    /* 반응형 화살표 위치 - 768px ~ 1024px */
-    @media (min-width: 768px) and (max-width: 1023px) {
-        .mySwiper {
-            padding-right: 400px;
-        }
-        .swiper-button-prev {
-            left: calc(50% - 340px);
-        }
-        .swiper-button-next {
-            left: calc(50% - 60px);
-            right: auto;
-        }
+        right: calc(50% - 150px);
     }
 
     /* 전체 화면 모달 */
@@ -229,23 +198,17 @@
         z-index: 1001;
     }
 </style>
-
-<div class="container">
-    <h1>🖼️ 이미지 갤러리</h1>
-    <div id="error"></div>
-    <div id="swiper-container">
-        <div class="swiper mySwiper">
-            <div class="swiper-wrapper" id="image-container"></div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-pagination"></div>
-        </div>
+<main>
+<div class="swiper-container">
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper" id="image-container"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
     </div>
 </div>
-
 <div id="fullScreenModal" class="full-screen-modal">
     <button id="closeModalBtn" class="modal-close-button">&times;</button>
     <img id="fullScreenImage" src="" alt="확대 이미지">
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+</main>
