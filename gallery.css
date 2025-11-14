@@ -1,228 +1,265 @@
    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
+       margin: 0;
+       padding: 0;
+       box-sizing: border-box;
+   }
 
-    main {
-        overflow-x: hidden;
-    }
+   main {
+       overflow-x: hidden;
+   }
 
-    body {
-        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        overflow-x: hidden;
-    }
+   body {
+       font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+       overflow-x: hidden;
+   }
 
-    h1 {
-        font-size: 1.875rem;
-        font-weight: bold;
-        color: #1f2937;
-        padding: 2rem 1.5rem 0;
-        margin: 0;
-    }
+   h1 {
+       font-size: 1.875rem;
+       font-weight: bold;
+       color: #1f2937;
+       padding: 2rem 1.5rem 0;
+       margin: 0;
+   }
 
-    main {
-        padding-right: 0;
-    }
+   main {
+       padding-right: 0;
+   }
 
-    /* Swiper 컨테이너 */
-    .swiper-container {
-        margin-top: 1.5rem;
-    }
+   /* Swiper 컨테이너 */
+   .swiper-container {
+       margin-top: 1.5rem;
+   }
 
-    .mySwiper {
-        width: calc(100% + 250px);
-        transform: translateX(-250px);
-        height: 500px;
-        padding-bottom: 40px;
-        box-sizing: border-box;
-    }
+   .mySwiper {
+       width: calc(100% + 250px);
+       transform: translateX(-250px);
+       height: 500px;
+       padding-bottom: 40px;
+       box-sizing: border-box;
+   }
 
-    /* 슬라이드 스타일 */
-    .mySwiper .swiper-slide {
-        text-align: center;
-        font-size: 18px;
-        display: flex;
-        justify-content: center;
-        align-items: flex-end;
-        background-color: transparent;
-        height: 100%;
-        width: 260px;
-        border-radius: 140px;
-        transition: transform 0.4s ease, opacity 0.4s ease;
-        transform-origin: center bottom;
-        transform: translateZ(0) scale(0.8);
-        opacity: 0.4;
-        -webkit-backface-visibility: hidden;
-        backface-visibility: hidden;
-        cursor: pointer;
-    }
+   /* 슬라이드 스타일 */
+   .mySwiper .swiper-slide {
+       text-align: center;
+       font-size: 18px;
+       display: flex;
+       justify-content: center;
+       align-items: flex-end;
+       background-color: transparent;
+       height: 100%;
+       width: 260px;
+       border-radius: 140px;
+       transition: transform 0.4s ease, opacity 0.4s ease;
+       transform-origin: center bottom;
+       transform: translateZ(0) scale(0.8);
+       opacity: 0.4;
+       -webkit-backface-visibility: hidden;
+       backface-visibility: hidden;
+       cursor: pointer;
+   }
 
-    /* 활성 슬라이드 */
-    .mySwiper .swiper-slide-active {
-        transform: translateZ(0) scale(1);
-        opacity: 1;
-        cursor: pointer;
-    }
+   /* 활성 슬라이드 */
+   .mySwiper .swiper-slide-active {
+       transform: translateZ(0) scale(1);
+       opacity: 1;
+       cursor: pointer;
+   }
 
-    /* 비활성 슬라이드는 클릭 못하게 */
-    .mySwiper .swiper-slide:not(.swiper-slide-active) {
-        pointer-events: none;
-    }
+   /* 비활성 슬라이드는 클릭 못하게 */
+   .mySwiper .swiper-slide:not(.swiper-slide-active) {
+       pointer-events: none;
+   }
 
-    /* 카드 래퍼 */
-    .card-wrapper {
-        position: relative;
-        background: white;
-        border-radius: 0.5rem 0.5rem 0 0;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        border-radius: 140px;
-        justify-content: flex-end;
-    }
+   /* 카드 래퍼 */
+   .card-wrapper {
+       position: relative;
+       background: white;
+       border-radius: 0.5rem 0.5rem 0 0;
+       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+       overflow: hidden;
+       width: 100%;
+       height: 100%;
+       display: flex;
+       flex-direction: column;
+       border-radius: 140px;
+       justify-content: flex-end;
+   }
 
-    /* 카드 이미지 */
-    .card-image {
-        width: auto;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-    }
+   /* 카드 이미지 */
+   .card-image {
+       width: auto;
+       height: 100%;
+       object-fit: cover;
+       display: block;
+   }
 
-    /* 카드 콘텐츠 */
-    .card-content {
-        padding: 1rem;
-        background: white;
-    }
+   /* 카드 콘텐츠 */
+   .card-content {
+       padding: 1rem;
+       background: white;
+   }
 
-    .card-title {
-        font-size: 0.875rem;
-        color: #1f2937;
-        font-weight: 600;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        margin: 0;
-    }
+   .card-title {
+       font-size: 0.875rem;
+       color: #1f2937;
+       font-weight: 600;
+       white-space: nowrap;
+       overflow: hidden;
+       text-overflow: ellipsis;
+       margin: 0;
+   }
 
-    .card-source {
-        font-size: 0.875rem;
-        color: #4b5563;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        margin: 0;
-    }
+   .card-source {
+       font-size: 0.875rem;
+       color: #4b5563;
+       white-space: nowrap;
+       overflow: hidden;
+       text-overflow: ellipsis;
+       margin: 0;
+   }
 
-    /* NEW 배지 */
-    .new-badge {
-        background-color: var(--point1);
+   /* NEW 배지 */
+   .new-badge {
+       background-color: var(--point1);
        color: var(--point2);
-        color: white;
-        padding: 4px 10px;
-        border-radius: 4px;
-        font-size: 12px;
-        font-weight: bold;
-        z-index: 10;
-    }
+       color: white;
+       padding: 4px 10px;
+       border-radius: 4px;
+       font-size: 12px;
+       font-weight: bold;
+       z-index: 10;
+   }
 
-    /* Swiper 기본 */
+   /* Swiper 기본 */
 
-    .swiper-slide {
-        background-position: center;
-        background-size: cover;
-    }
+   .swiper-slide {
+       background-position: center;
+       background-size: cover;
+   }
 
-    /* 네비게이션 색상 */
-    :root {
-        --swiper-navigation-color: #4b5563;
-        --swiper-pagination-color: #4b5563;
-    }
+   /* 네비게이션 색상 */
+   :root {
+       --swiper-navigation-color: #4b5563;
+       --swiper-pagination-color: #4b5563;
+   }
 
-    /* 화살표 위치 - 포커스 된 이미지 양옆 */
-    .swiper-button-prev,
-    .swiper-button-next {
-        top: 50%;
-        transform: translateY(-50%);
-        width: auto;
-        height: auto;
-    }
+   /* 화살표 위치 - 포커스 된 이미지 양옆 */
+   .swiper-button-prev,
+   .swiper-button-next {
+       top: 50%;
+       transform: translateY(-50%);
+       width: auto;
+       height: auto;
+   }
 
-    .swiper-button-prev {
-        left: calc(50% - 150px);
-    }
+   .swiper-button-prev {
+       left: calc(50% - 150px);
+   }
 
-    .swiper-button-next {
-        right: calc(50% - 150px);
-    }
+   .swiper-button-next {
+       right: calc(50% - 150px);
+   }
 
-    /* 전체 화면 모달 */
-    .full-screen-modal {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background-color: rgba(0, 0, 0, 0.8);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.3s ease, visibility 0.3s ease;
-    }
+   /* 전체 화면 모달 */
+   .full-screen-modal {
+       position: fixed;
+       top: 0;
+       left: 0;
+       width: 100vw;
+       height: 100vh;
+       background-color: rgba(0, 0, 0, 0.8);
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       z-index: 1000;
+       opacity: 0;
+       visibility: hidden;
+       transition: opacity 0.3s ease, visibility 0.3s ease;
+   }
 
-    .full-screen-modal.active {
-        opacity: 1;
-        visibility: visible;
-    }
+   .full-screen-modal.active {
+       opacity: 1;
+       visibility: visible;
+   }
 
-    .full-screen-modal img {
-        max-width: 90vw;
-        max-height: 90vh;
-        object-fit: contain;
-        cursor: zoom-out;
-    }
+   .full-screen-modal img {
+       max-width: 90vw;
+       max-height: 90vh;
+       object-fit: contain;
+       cursor: zoom-out;
+   }
 
-    /* 모달 닫기 버튼 */
-    .modal-close-button {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        background: none;
-        border: none;
-        color: white;
-        font-size: 2.5rem;
-        cursor: pointer;
-        z-index: 1001;
-    }
+   /* 모달 닫기 버튼 */
+   .modal-close-button {
+       position: absolute;
+       top: 20px;
+       right: 20px;
+       background: none;
+       border: none;
+       color: white;
+       font-size: 2.5rem;
+       cursor: pointer;
+       z-index: 1001;
+   }
 
-    #error {
-        display: none;
-        padding: 1.5rem;
-    }
+   #error {
+       display: none;
+       padding: 1.5rem;
+   }
 
-    .error-message {
-        background-color: #fee2e2;
-        color: #991b1b;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        margin: 1.25rem 0;
-    }
-.swiper-button-next:after, .swiper-button-prev:after {
-    font-size: 30px;
-    color: var(--back);
-    font-weight: 900;
-}
+   .error-message {
+       background-color: #fee2e2;
+       color: #991b1b;
+       padding: 1rem;
+       border-radius: 0.5rem;
+       margin: 1.25rem 0;
+   }
 
-.swiper-button-next, .swiper-button-prev {
-    background: var(--point1);
-    width: 50px;
-    border-radius: 50%;
-    height: 50px;
-}
+   /* 로딩 애니메이션 */
+   @keyframes slideUpFade {
+       from {
+           opacity: 0;
+           transform: translateY(40px) scale(0.8);
+       }
+
+       to {
+           opacity: 0.4;
+           transform: translateY(0) scale(0.8);
+       }
+   }
+
+   /* 포커스된 이미지 애니메이션 */
+   @keyframes slideUpFadeActive {
+       from {
+           opacity: 0;
+           transform: translateY(40px) scale(0.8);
+       }
+
+       to {
+           opacity: 1;
+           transform: translateY(0) scale(1);
+       }
+   }
+
+   .mySwiper .swiper-slide {
+       animation: slideUpFade 0.6s ease-out backwards;
+   }
+
+   .mySwiper .swiper-slide.center-slide {
+       animation: slideUpFadeActive 0.6s ease-out backwards !important;
+   }
+
+   .swiper-button-next:after,
+   .swiper-button-prev:after {
+       font-size: 30px;
+       color: var(--back);
+       font-weight: 900;
+   }
+
+   .swiper-button-next,
+   .swiper-button-prev {
+       background: var(--point1);
+       width: 50px;
+       border-radius: 50%;
+       height: 50px;
+   }
