@@ -251,7 +251,7 @@
 
     .mySwiper .swiper-slide-prev,
    .mySwiper .swiper-slide-next {
-        animation-delay: 2s; 
+        animation-delay: 0.2s; 
     }
 
 
