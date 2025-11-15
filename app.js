@@ -97,6 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.remove('is-first-load');
   }, 2000); 
 });
+
 // gallery 초기화 함수
 function initGallery() {
     const imageContainer = document.getElementById('image-container');
@@ -133,6 +134,12 @@ function initGallery() {
             }
 
             renderImages(images);
+            
+            // loading 클래스 추가
+            const mySwiperElement = document.querySelector('.mySwiper');
+            if (mySwiperElement) {
+                mySwiperElement.classList.add('loading');
+            }
 
             if (swiper) {
                 swiper.destroy();
@@ -159,10 +166,16 @@ function initGallery() {
 
     function renderImages(images) {
         imageContainer.innerHTML = '';
+        const centerIndex = Math.floor(images.length / 2);
 
         images.forEach((image, index) => {
             const slide = document.createElement('div');
             slide.className = 'swiper-slide';
+
+            // 중앙 이미지에 center-slide 클래스 추가
+            if (index === centerIndex) {
+                slide.classList.add('center-slide');
+            }
 
             const isNew = isNewImage(image.date);
             const newBadge = isNew ? '<span class="new-badge">NEW</span>' : '';
@@ -200,6 +213,18 @@ function initGallery() {
             },
         });
 
+        // 애니메이션 완료 후 loading 클래스 제거
+        const maxDelay = 0.5; // 가장 먼 슬라이드의 delay (초)
+        const animationDuration = 0.6; // 애니메이션 지속 시간 (초)
+        const totalTime = (maxDelay + animationDuration + 0.1) * 1000; // ms로 변환
+
+        setTimeout(() => {
+            const mySwiperElement = document.querySelector('.mySwiper');
+            if (mySwiperElement) {
+                mySwiperElement.classList.remove('loading');
+            }
+        }, totalTime);
+
         // 슬라이드 변경 시 opacity 조정
         swiper.on('slideChange', () => {
             document.querySelectorAll('.mySwiper .swiper-slide').forEach(slide => {
@@ -212,7 +237,7 @@ function initGallery() {
 
         // 초기 활성 슬라이드 opacity 설정
         document.querySelectorAll('.mySwiper .swiper-slide').forEach(slide => {
-            slide.style.opacity = '0.4';
+
         });
         if (swiper.slides[swiper.activeIndex]) {
             swiper.slides[swiper.activeIndex].style.opacity = '1';
@@ -251,8 +276,3 @@ function initGallery() {
 
     loadImages();
 }
-
-
-
-
-
