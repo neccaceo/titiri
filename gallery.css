@@ -244,11 +244,20 @@
    .mySwiper .swiper-slide {
        animation: slideUpFade 0.6s ease-out backwards;
    }
+    .mySwiper .swiper-slide-active{
+        animation-delay: 0s; 
+    }
 
-   .mySwiper .swiper-slide.center-slide {
-       animation: slideUpFadeActive 0.6s ease-out backwards !important;
-   }
 
+    .mySwiper .swiper-slide-prev,
+   .mySwiper .swiper-slide-next {
+        animation-delay: 2s; 
+    }
+
+
+.mySwiper .swiper-slide:not(.swiper-slide-active):not(.swiper-slide-prev):not(.swiper-slide-next) {
+    animation-delay: 0.4s;
+}
    .swiper-button-next:after,
    .swiper-button-prev:after {
        font-size: 30px;
